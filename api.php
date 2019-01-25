@@ -57,72 +57,10 @@ if ($debug_mode) {
 // Get csr value
 openssl_csr_export($csr, $csr_out);
 
-//// Preparing Mail
-//$order = array("\r\n", "\n", "\r");
-//$replace = '<br />';
-//
-//$from = $mail_username; //change this to your email address
-//$to = $dn["emailAddress"];
-//$subject = "CSR and SSL Private Key for " . $dn["commonName"];
-//$body = "Dear Customer,<br>";
-//$body .= "Thank you for choosing us to generate your CSR and SSL Private Key.<br>";
-//$body .= "Please keep this in a safe place!<br>";
-//$body .= "We provide most cheapest SSL Certificates and we can beat any competitor price for you.<br><br>";
-//$body .= "SSL Private Key:<br>";
-//$body .= str_replace($order, $replace, $privkey_out);
-//$body .= "<br>CSR:<br>";
-//$body .= str_replace($order, $replace, $csr_out);
-//$body .= "<br>Have a nice day and Best Regards,<br>";
-//
-//// Preparing header fields
-//$headers = array(
-//    'From' => $from,
-//    'To' => $to,
-//    'Subject' => $subject,
-//    'MIME-Version' => '1.0',
-//    'Content-Type' => "text/html; charset=utf-8"
-//);
-// Decide sending mode
-//if (!($smtp_enable)) {
-//    $mail_object = Mail::factory('mail');
-//} else {
-//    $mail_object = Mail::factory('smtp', array(
-//        'host' => $mail_server,
-//        'port' => $mail_port,
-//        'auth' => true,
-//        'username' => $mail_username, //your gmail account
-//        'password' => $mail_password // your password
-//    ));
-//}
 
-// Send the mail
-//$mail = $mail_object->send($to, $headers, $body);
-//if (PEAR::isError($mail)) {
-//    $status = 1;
-//    if ($debug_mode) {
-//        echo "<p>" . $mail->getMessage() . "</p>";
-//    }
-//
-//else {
-//    $status = 2;
-//    if ($debug_mode) {
-//        echo "Message successfully sent!<br>";
-//    }
-//}
 
-//Debug information
-//if ($debug_mode) {
-//    if (!($smtp_enable)) {
-//        echo "Mail mode!!!!!<br>";
-//    } else {
-//        echo "SMTP mode!!!!!<br>";
-//    }
-//    echo "Mail to: " . $to . "<br>";
-//    echo "Subject: " . $subject . "<br>";
-//    echo "Message: " . $body . "<br>";
-//    echo "Headers: " . var_dump($headers) . "<br>";
-//    echo "Status: " . $status . "<br>";
-//}
+
+
 
 $arr = array('status' => $status, 'private_key' => $privkey_out, 'csr' => $csr_out);
 

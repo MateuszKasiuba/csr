@@ -52,9 +52,9 @@ include 'country_code.php'
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-5 col-xs-5" for="stateOrProvinceName">State:*</label>
+                    <label class="control-label col-sm-5 col-xs-5" for="stateOrProvinceName">State:</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="stateOrProvinceName" placeholder="California" required>
+                        <input type="text" class="form-control" id="stateOrProvinceName" placeholder="California">
                     </div>
                 </div>
                 <div class="form-group">
@@ -71,8 +71,18 @@ include 'country_code.php'
                                 <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                             <?php } ?>
                         </select>
+
+                        <label class="control-label col-sm-150 col-xs-13" for="stateOrProvinceName">Key Size:*</label>
+                        <input type="radio" name="key_value" value="zero">2048
+                        <input type="radio" name="key_value" value="disable">4096
+
                     </div>
                 </div>
+
+
+
+
+
                 <div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
                     <button class="btn btn-lg btn-primary btn-block" type="button" id="Submit">Submit</button>
                 </div>
