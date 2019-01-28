@@ -36,7 +36,7 @@
             // take away protocol and www
             commonName = UrlProcessing(commonName);
             // call api to do thing
-            $.get('api.php',{
+            $.post('api.php',{
                 commonName: commonName,
                 organizationName: organizationName,
                 organizationalUnitName: organizationalUnitName,
@@ -46,41 +46,28 @@
                 countryName: countryName
             }, function(data){
                 // check if blank
-                if(!data){
+                if (!data) {
                     var temp_string = "Api Failed!";
-                    ModalActive(temp_string,temp_string);
-                }
-                else{
+                    ModalActive(temp_string, temp_string);
+                } else {
                     // check status
-                    if(data.status==0){
+                    if (data.status == 0) {
                         var header_string = "Good job!";
-                        debugger;
                         var body_string = data.csr;
-                        ModalActive(header_string,body_string);
+                        ModalActive(header_string, body_string);
                     }
-                    else if(data.status>=1){
-                        var header_string = "Good Job";
-                        var body_string;
-                        var private_key_string, csr_string;
-                        if(data.status==2){
-                            body_string = "<p>Generated CSR & Private Key have emailed to you.<br/> \
-								Please check your mailbox.</p> \
-								<p>Private Key: <br />";
-                        }
-                        else{
-                            body_string = "<p>CSR & Private Key is generated.<br/> \
-								But, it failed when sending email to you.</p> \
-								Please copy it by yourself.</p> \
-								<p>Private Key: <br />";
-                        }
-                        private_key_string = data.private_key.replace(/\n/g, "<br />");
-                        csr_string = data.csr.replace(/\n/g, "<br />");
-                        body_string += private_key_string + "</p>";
-                        body_string += "<p>CSR: <br />";
-                        body_string += csr_string + "</p>";
-                        ModalActive(header_string,body_string);
-                    }
+                     else if(data.status>=1){
+                    //     var header_string = "Good Job";
+                    //     var body_string;
+
+                    private_key_string = data.private_key.replace(/\n/g, "<br />");
+                    csr_string = data.csr.replace(/\n/g, "<br />");
+                    body_string += private_key_string + "</p>";
+                    body_string += "<p>CSR: <br />";
+                    body_string += csr_string + "</p>";
+                    ModalActive(header_string, body_string);
                 }
+            }
             });
         }
         $(this).removeAttr("disabled");

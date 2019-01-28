@@ -30,37 +30,37 @@ include 'country_code.php'
                 <div class="form-group">
                     <label class="control-label col-sm-5 col-xs-5" for="commonName">Common Name:*</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="commonName" placeholder="gidcs.net ( must be your domain name! )" required>
+                        <input type="text" class="form-control" id="commonName" placeholder="example: omarsys.com(must be your domain name!)" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-5 col-xs-5" for="organizationName">Organization (in English):*</label>
+                    <label class="control-label col-sm-5 col-xs-5" for="organizationName">example: XCaliber:*</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="organizationName" placeholder="GIDCS.Net" required>
+                        <input type="text" class="form-control" id="organizationName" placeholder="example: XCaliber" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-5 col-xs-5" for="organizationalUnitName">Department:*</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="organizationalUnitName" placeholder="IT Dept" required>
+                        <input type="text" class="form-control" id="organizationalUnitName" placeholder="example: IT Dept" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-5 col-xs-5" for="localityName">City:*</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="localityName" placeholder="Los Angeles" required>
+                        <input type="text" class="form-control" id="localityName" placeholder="example: Valetta" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-5 col-xs-5" for="stateOrProvinceName">State:</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="stateOrProvinceName" placeholder="California">
+                        <input type="text" class="form-control" id="stateOrProvinceName" placeholder="example: Valetta">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-5 col-xs-5" for="emailAddress">Email:*</label>
                     <div class="col-sm-7 col-xs-7">
-                        <input type="text" class="form-control" id="emailAddress" placeholder="admin@gidcs.net" required>
+                        <input type="text" class="form-control" id="emailAddress" placeholder="example: admin@xcaliber.com" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,7 +72,7 @@ include 'country_code.php'
                             <?php } ?>
                         </select>
 
-                        <label class="control-label col-sm-150 col-xs-13" for="stateOrProvinceName">Key Size:*</label>
+                        <label class="control-label col-sm-150 col-xs-13" for="key_size">Key Size:*</label>
                         <input type="radio" name="key_value" value="zero">2048
                         <input type="radio" name="key_value" value="disable">4096
 
