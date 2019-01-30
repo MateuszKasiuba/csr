@@ -1,31 +1,29 @@
-
 <?php
+function sendToVault($csr, $privkey) {
+    $ch = curl_init();
 
+    curl_setopt($ch, CURLOPT_URL, 'https://vault-tech.omarsys.inet:8200/v1/secret_v2/data/test2.com');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $headers = array();
+    $headers[] = 'X-Vault-Token: 573e0470-63c5-8ddc-6f76-a1367249231d';
+    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
 
-//next example will insert new conversation
-$service_url = 'https://vault-tech.omarsys.inet:8200/v1/secret_v2/data/test.com';
-$curl = curl_init($service_url);
-$curl_post_data = array(
-    'priv_key' => $privkey,
-    'csr' => $csr,
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+        'data' => [
+            'csr' => $csr,
+            'key' => $privkey
+        ]
+    ]));
 
-);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
-$curl_response = curl_exec($curl);
-if ($curl_response === false) {
-    $info = curl_getinfo($curl);
-    curl_close($curl);
-    die('error occured during curl exec. Additioanl info: ' . var_export($info));
+    $result = curl_exec($ch);
+    if (!$result) {
+        throw new Exception('Error:' . curl_error($ch));
+    }
+    curl_close ($ch);
 }
-curl_close($curl);
-$decoded = json_decode($curl_response);
-if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
-    die('error occured: ' . $decoded->response->errormessage);
-}
-echo 'response ok!';
-var_export($decoded->response);
-
 
 

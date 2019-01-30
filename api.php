@@ -37,17 +37,21 @@ if (!in_array("", $dn)) {
 }
 // Get private key value
 $privkey = openssl_pkey_export($privkey, $privkey_out);
-
-
 // Generate a certificate signing request
 $csr = openssl_csr_new($dn, $privkey, $openssl_config);
-
 // Get csr value
 openssl_csr_export($csr, $csr_out);
 
 
-$arr = array('status' => $status, 'private_key' => $privkey_out, 'csr' => $csr_out);
+$arr = ['csr' => $csr_out];
 
+try {
+    sendToVault($csr_out, $privkey_out);
+} catch (\Exception $exception) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo json_encode([$exception->getMessage()]);
+    exit();
+}
 // Output Json
 echo json_encode($arr);
 

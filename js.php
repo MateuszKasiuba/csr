@@ -46,28 +46,9 @@
                 countryName: countryName
             }, function(data){
                 // check if blank
-                if (!data) {
-                    var temp_string = "Api Failed!";
-                    ModalActive(temp_string, temp_string);
-                } else {
-                    // check status
-                    if (data.status == 0) {
-                        var header_string = "Good job!";
-                        var body_string = data.csr;
-                        ModalActive(header_string, body_string);
-                    }
-                     else if(data.status>=1){
-                    //     var header_string = "Good Job";
-                    //     var body_string;
-
-                    private_key_string = data.private_key.replace(/\n/g, "<br />");
-                    csr_string = data.csr.replace(/\n/g, "<br />");
-                    body_string += private_key_string + "</p>";
-                    body_string += "<p>CSR: <br />";
-                    body_string += csr_string + "</p>";
-                    ModalActive(header_string, body_string);
-                }
-            }
+                ModalActive("Good job!", data.csr);
+            }, 'json').fail(function(message) {
+                ModalActive("ERROR", message.responseJSON[0]);
             });
         }
         $(this).removeAttr("disabled");
