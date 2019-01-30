@@ -31,10 +31,87 @@ include 'country_code.php'
                     <label class="control-label col-sm-5 col-xs-5" for="commonName">Common Name:*</label>
                     <div class="col-sm-7 col-xs-7">
                         <input type="text" class="form-control" id="commonName" placeholder="example: omarsys.com(must be your domain name!)" required>
+
+
+                        <html>
+
+
+                        <body>
+
+                        <div id="main">
+                            <input type="button" id="btAdd" value="Add Element" class="bt" />
+                            <input type="button" id="btRemove" value="Remove Element" class="bt" />
+                        </div>
+                        </body>
+
+                        <script>
+                            $(document).ready(function() {
+
+                                var iCnt = 0;
+                                // CREATE A "DIV" ELEMENT AND DESIGN IT USING jQuery ".css()" CLASS.
+                                var container = $(document.createElement('div')).css({
+                                    padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+                                    borderTopColor: '#999', borderBottomColor: '#999',
+                                    borderLeftColor: '#999', borderRightColor: '#999'
+                                });
+
+                                $('#btAdd').click(function() {
+                                    if (iCnt <= 19) {
+
+                                        iCnt = iCnt + 1;
+
+                                        // ADD TEXTBOX.
+                                        $(container).append('<input type=text class="input" id=tb' + iCnt + ' ' +
+                                            'value="Text Element ' + iCnt + '" />');
+
+                                        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+                                        if (iCnt == 1) {
+                                            var divSubmit = $(document.createElement('div'));
+                                            $(divSubmit).append('<input type=button class="bt"' +
+                                                'onclick="GetTextValue()"' +
+                                                'id=btSubmit value=Submit />');
+                                        }
+
+                                        // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+                                        $('#main').after(container);
+                                    }
+                                    // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON.
+                                    // (20 IS THE LIMIT WE HAVE SET)
+                                    else {
+                                        $(container).append('<label>Reached the limit</label>');
+                                        $('#btAdd').attr('class', 'bt-disable');
+                                        $('#btAdd').attr('disabled', 'disabled');
+                                    }
+                                });
+
+                                // REMOVE ONE ELEMENT PER CLICK.
+                                $('#btRemove').click(function() {
+                                    if (iCnt != 0) { $('#tb' + iCnt).remove(); iCnt = iCnt - 1; }
+
+                                    if (iCnt == 0) {
+                                        $(container)
+                                            .empty()
+                                            .remove();
+
+
+                                        $('#btAdd')
+                                            .removeAttr('disabled')
+                                            .attr('class', 'bt');
+                                    }
+                                });
+
+                                });
+
+
+                        </script>
+                        </html>
                     </div>
-                </div>
+
+
+
+
                 <div class="form-group">
-                    <label class="control-label col-sm-5 col-xs-5" for="organizationName">example: XCaliber:*</label>
+                    <label class="control-label col-sm-5 col-xs-5" for="organizationName">Organization Name:*</label>
                     <div class="col-sm-7 col-xs-7">
                         <input type="text" class="form-control" id="organizationName" placeholder="example: XCaliber" required>
                     </div>
@@ -83,13 +160,13 @@ include 'country_code.php'
 
 
 
-                <div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
-                    <button class="btn btn-lg btn-primary btn-block" type="button" id="Submit">Submit</button>
+                <div class="col-sm-30 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+                    <button class="btn btn-lg btn-primary btn-block" type="button" id="Submit">Generate CSR</button>
                 </div>
             </div>
-        </div><!-- /main -->
-    </div><!-- /row -->
-</div><!-- /container -->
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
